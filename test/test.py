@@ -1,9 +1,21 @@
+# -*- coding: utf-8 -*-
+
+'''
+Author: Jiawei Ye
+Date: 2023-06-19 21:18:55
+LastEditors: Jiawei Ye
+LastEditTime: 2023-06-19 22:33:34
+FilePath: /rdcs/test/test.py
+Description: 
+
+'''
 import requests
 import json
 # from swissknife import show_all_plots, plot_from_dict
 import matplotlib.pyplot as plt
 import base64
 import io
+import os
 from PIL import Image
 plt.rcParams['font.sans-serif'] = ['Arial Unicode MS']  # 用来正常显示中文标签
 plt.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号
@@ -12,8 +24,9 @@ plt.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号
 with open('request1.json', 'r') as f:
     data = json.load(f)
 
+target_ip = os.getenv('TARGET_IP', '127.0.0.1')
 # 发送POST请求
-response = requests.post('http://127.0.0.1:4999/main', json=data)
+response = requests.post(f'http://{target_ip}:4999/main', json=data)
 
 # 将返回结果转为json
 result = response.json()
@@ -36,7 +49,8 @@ def show_all_plots(all_plots):
         plt.imshow(image)
         plt.title(ne)
         plt.axis('off')  # Hide the axis
-        plt.show()
+        plt.savefig(f'output/NE_{ne}.png')
+        plt.close()
 
 def plot_from_dict(result_dict):
     for ne, kpi_dict in result_dict.items():
@@ -48,7 +62,8 @@ def plot_from_dict(result_dict):
             plt.title(f'neName: {ne} - KPI: {kpi}')
             plt.imshow(image)
             plt.axis('off')  # disable axis
-            plt.show()
+            plt.savefig(f'output/NE_{ne}_KPI_{kpi}.png')
+            plt.close()
 
 show_all_plots(cl_plots)
 
