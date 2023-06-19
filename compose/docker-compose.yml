@@ -37,7 +37,7 @@ services:
     ports:
       - "5001:5001"
     volumes:
-      - /Users/vaye/Projects/Pytorch/models:/app/models
+      - /home/vaye/codes/projects/rdcs/models:/app/models
     # healthcheck:
     #   test: ["CMD", "curl", "-f", "http://localhost:5001/health"]
     #   interval: 30s
