@@ -1,0 +1,10 @@
+numpy
+flask
+pandas==1.5.3
+requests
+retrying
+gunicorn
+joblib
+matplotlib
+pillow
+scikit-learn

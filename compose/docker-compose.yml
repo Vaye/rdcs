@@ -1,0 +1,81 @@
+version: '3.8'
+services:
+  app_main:
+    image: app_main:0.8
+    container_name: app_main
+    networks:
+      - rdcnet
+    ports:
+      - "4999:4999"
+    environment:
+      - APP_RD=${APP_RD}
+      - APP_CL=${APP_CL}
+      - APP_PLOT=${APP_PLOT}
+      # APP_RD: app_rd
+      # APP_CL: app_cl
+      # APP_PLOT: app_plot
+    depends_on:
+      - app_rd
+      - app_cl
+      - app_plot
+    # depends_on:
+    #   app_rd:
+    #     condition: service_healthy
+    #   app_cl:
+    #     condition: service_healthy
+    #   app_plot:
+    #     condition: service_healthy
+    # restart: unless-stopped
+
+  app_rd:
+    image: app_rd:0.8
+    # deploy:
+    #   replicas: 3
+    container_name: app_rd
+    networks:
+      - rdcnet
+    ports:
+      - "5001:5001"
+    volumes:
+      - /Users/vaye/Projects/Pytorch/models:/app/models
+    # healthcheck:
+    #   test: ["CMD", "curl", "-f", "http://localhost:5001/health"]
+    #   interval: 30s
+    #   timeout: 10s
+    #   retries: 3
+    # restart: unless-stopped    
+
+  app_cl:
+    image: app_cl:0.5
+    # deploy:
+    #   replicas: 3
+    container_name: app_cl
+    networks:
+      - rdcnet
+    ports:
+      - "5002:5002"
+    # healthcheck:
+    #   test: ["CMD", "curl", "-f", "http://localhost:5002/health"]
+    #   interval: 30s
+    #   timeout: 10s
+    #   retries: 3
+    # restart: unless-stopped
+
+  app_plot:
+    image: app_plot:0.5
+    # deploy:
+    #   replicas: 3
+    container_name: app_plot
+    networks:
+      - rdcnet
+    ports:
+      - "5003:5003"
+    # healthcheck:
+    #   test: ["CMD", "curl", "-f", "http://localhost:5003/health"]
+    #   interval: 30s
+    #   timeout: 10s
+    #   retries: 3
+    # restart: unless-stopped
+
+networks:
+  rdcnet:
