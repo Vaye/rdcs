@@ -11,24 +11,6 @@ import numpy as np
 from sklearn.cluster import DBSCAN
 from PIL import Image
 
-# def preprocess_data(data):
-#     df_drop = data.dropna() # 去掉丢失数据的样本
-#     df_drop = df_drop.drop_duplicates()
-#     df_clean = df_drop.reset_index(drop=True)
-
-#     # 提取网元名称和时间戳
-#     ne_time_column_list = ['neName','time'] 
-#     kpi_list = [c for c in df_clean.columns.tolist() if c not in ne_time_column_list] # KPI表头
-
-#     df_ne_time = df_clean[ne_time_column_list] # 网元名称和时间
-
-#     ds = df_clean[kpi_list].to_numpy()
-
-#     # 对数据进行归一化
-#     scaler = joblib.load('models/scaler.save')
-#     ds_norm=scaler.transform(ds).tolist()
-
-#     return df_clean, df_ne_time, ds_norm
 
 def preprocess_data(data):
     df_drop = data.dropna() # 去掉丢失数据的样本
@@ -94,6 +76,7 @@ def generate_image_dict(df_clean, kpi_columns, anomaly_time_dict):
             buf = io.BytesIO()
             plt.savefig(buf, format='png')
             buf.seek(0)
+            plt.close()
 
             # 将二进制数据编码为Base64字符串
             image_base64 = base64.b64encode(buf.read()).decode('utf-8')
@@ -116,6 +99,7 @@ def plot_from_dict(result_dict):
             plt.imshow(image)
             plt.axis('off')  # disable axis
             plt.show()
+            plt.close()
 
 
 
@@ -187,6 +171,7 @@ def show_all_plots(all_plots):
         plt.title(ne)
         plt.axis('off')  # Hide the axis
         plt.show()
+        plt.close()
 
 
 def tree_convert_dataframe_to_dict_and_ndarray_to_list_format(node):

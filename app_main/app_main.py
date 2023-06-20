@@ -1,3 +1,14 @@
+# -*- coding: utf-8 -*-
+
+'''
+Author: Jiawei Ye
+Date: 2023-06-19 21:18:55
+LastEditors: Jiawei Ye
+LastEditTime: 2023-06-20 21:49:29
+FilePath: /rdcs/app_main/app_main.py
+Description: 
+
+'''
 
 from flask import Flask, request, jsonify
 import pandas as pd
@@ -26,7 +37,7 @@ def retry_if_connection_error(exception):
 @retry(retry_on_exception=retry_if_connection_error, stop_max_attempt_number=3)
 def send_request(url, data):
     try:
-        response = requests.post(url, json=data, timeout=10)
+        response = requests.post(url, json=data, timeout=60)
         response.raise_for_status()  # 如果响应的状态码不是 200，引发异常
     except requests.exceptions.RequestException as e:
         logging.error("请求失败: %s", e)
