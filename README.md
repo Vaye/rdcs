@@ -12,7 +12,7 @@ compose: docker compose files<br>
 test: files for service testing<br>
 ## Installation
 build 4images for each service:  
-    '   docker build -t app_main:0.8 -f app_main/Dockerfile .'<br>
+    docker build -t app_main:0.8 -f app_main/Dockerfile .<br>
     '   docker build -t app_rd:0.8 -f app_rd/Dockerfile .'<br>
     '   docker build -t app_cl:0.5 -f app_cl/Dockerfile .'<br>
     '   docker build -t app_plot:0.5 -f app_plot/Dockerfile .  '<br>
