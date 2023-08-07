@@ -4,7 +4,7 @@
 Author: Jiawei Ye
 Date: 2023-06-19 21:18:55
 LastEditors: Jiawei Ye
-LastEditTime: 2023-06-19 22:33:34
+LastEditTime: 2023-08-03 16:31:16
 FilePath: /rdcs/test/test.py
 Description: 
 
@@ -21,7 +21,8 @@ plt.rcParams['font.sans-serif'] = ['Arial Unicode MS']  # 用来正常显示中�
 plt.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号
 
 # 读取json文件
-with open('request1.json', 'r') as f:
+print(os.getcwd())
+with open('test/request_gd2b_s.json', 'r') as f:
     data = json.load(f)
 
 target_ip = os.getenv('TARGET_IP', '127.0.0.1')
