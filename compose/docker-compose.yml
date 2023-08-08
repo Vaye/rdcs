@@ -28,7 +28,7 @@ services:
     # restart: unless-stopped
 
   app_rd:
-    image: app_rd:0.8
+    image: app_rd:0.9
     # deploy:
     #   replicas: 3
     container_name: app_rd
