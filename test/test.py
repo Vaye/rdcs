@@ -4,8 +4,8 @@
 Author: Jiawei Ye
 Date: 2023-06-19 21:18:55
 LastEditors: Jiawei Ye
-LastEditTime: 2023-08-08 22:46:06
-FilePath: /rdcs/test/test.py
+LastEditTime: 2023-08-19 12:16:00
+FilePath: /rdcs_9sky/test/test.py
 Description: 
 
 '''
@@ -30,7 +30,19 @@ target_ip = os.getenv('TARGET_IP', '127.0.0.1')
 response = requests.post(f'http://{target_ip}:4999/main', json=data)
 
 # 将返回结果转为json
-result = response.json()
+# result = response.json()
+
+# for troubleshooting
+print("HTTP Status Code:", response.status_code)
+print("Response Text:", response.text)
+
+if response.status_code == 200:
+    try:
+        result = response.json()
+    except requests.exceptions.JSONDecodeError:
+        print("Error: Response does not contain valid JSON.")
+else:
+    print("Error: HTTP request failed with status code:", response.status_code)
 
 # 获取需要的值
 anomaly = result.get('anomaly')

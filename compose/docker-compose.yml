@@ -1,15 +1,15 @@
 version: '3.8'
 services:
   combined_app:
-    image: rdcs_9sky:1.0
+    image: rdcs_9sky:0.1
     container_name: rdcs_9sky
     networks:
-      - rdcnet
+      - rdcnet9sky
     ports:
       - "4999:4999"
-      - "5001:5001"
-      - "5002:5002"
-      - "5003:5003"
+      # - "5001:5001"
+      # - "5002:5002"
+      # - "5003:5003"
     volumes:
       - ../models/gd:/app/models
     environment:
@@ -20,4 +20,4 @@ services:
       - APP_PLOT=${APP_PLOT}
 
 networks:
-  rdcnet:
+  rdcnet9sky:

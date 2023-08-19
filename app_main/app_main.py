@@ -44,7 +44,7 @@ def retry_if_connection_error(exception):
 @retry(retry_on_exception=retry_if_connection_error, stop_max_attempt_number=3)
 def send_request(url, data):
     try:
-        response = requests.post(url, json=data, timeout=60)
+        response = requests.post(url, json=data, timeout=120)
         response.raise_for_status()  # 如果响应的状态码不是 200，引发异常
     except requests.exceptions.RequestException as e:
         logging.error("请求失败: %s", e)

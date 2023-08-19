@@ -4,7 +4,7 @@
 Author: Jiawei Ye
 Date: 2023-08-18 16:13:10
 LastEditors: Jiawei Ye
-LastEditTime: 2023-08-19 11:35:51
+LastEditTime: 2023-08-19 12:09:42
 FilePath: /rdcs_9sky/app_rd/app_rd.py
 Description: 
 
@@ -43,7 +43,7 @@ def dimreduction():
         data = request.get_json(force=True)
         ds = np.array(data["ds_norm"])
         # 对数据进行归一化
-        scaler = joblib.load('models/scaler.save')
+        scaler = joblib.load('/app/models/scaler.save')
         ds_norm=scaler.transform(ds).tolist()
         xcode = reducer.reduction(ds_norm)
         result = {'xcode':xcode} #list
