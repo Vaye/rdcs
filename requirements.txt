@@ -1,0 +1,12 @@
+numpy
+torch
+flask
+joblib
+scikit-learn
+gunicorn
+pandas==1.5.3
+matplotlib
+pillow
+requests
+retrying
+# supervisor

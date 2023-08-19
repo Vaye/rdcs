@@ -1,11 +1,26 @@
+# -*- coding: utf-8 -*-
 
-from flask import Flask, request, jsonify
-import numpy as np
-import joblib
-import torch
-from time import time, sleep
+'''
+Author: Jiawei Ye
+Date: 2023-08-18 16:13:10
+LastEditors: Jiawei Ye
+LastEditTime: 2023-08-19 11:35:51
+FilePath: /rdcs_9sky/app_rd/app_rd.py
+Description: 
+
+'''
 import logging
+import os
+from time import sleep, time
+
+import joblib
+import numpy as np
+import torch
 from do_reduction import Reducer
+from flask import Flask, jsonify, request
+
+INPUT_DIM = int(os.environ.get("INPUT_DIM"))
+MODEL_PATH_NAME = os.environ.get("MODEL_PATH_NAME")
 
 app = Flask(__name__)
 
@@ -20,7 +35,7 @@ device = (
     if torch.backends.mps.is_available()
     else "cpu"
 )
-reducer = Reducer('models/tj_amf_state_model.pth', device)
+reducer = Reducer(MODEL_PATH_NAME, device, INPUT_DIM)
 
 @app.route('/dimreduction', methods=['POST'])
 def dimreduction():
