@@ -1,8 +1,8 @@
 version: '3.8'
 services:
   combined_app:
-    image: combined_app:1.0
-    container_name: combined_app
+    image: rdcs_9sky:1.0
+    container_name: rdcs_9sky
     networks:
       - rdcnet
     ports:
