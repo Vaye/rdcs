@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   app_main:
-    image: app_main:0.8
+    image: app_main:0.9
     container_name: app_main
     networks:
       - rdcnet
@@ -11,6 +11,7 @@ services:
       - APP_RD=${APP_RD}
       - APP_CL=${APP_CL}
       - APP_PLOT=${APP_PLOT}
+      - RESPONSE_TIMER_SEC=${RESPONSE_TIMER_SEC}
       # APP_RD: app_rd
       # APP_CL: app_cl
       # APP_PLOT: app_plot
