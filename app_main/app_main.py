@@ -4,7 +4,7 @@
 Author: Jiawei Ye
 Date: 2023-06-19 21:18:55
 LastEditors: Jiawei Ye
-LastEditTime: 2023-11-06 16:14:18
+LastEditTime: 2023-11-06 22:27:56
 FilePath: /rdcs/app_main/app_main.py
 Description: 
 
@@ -25,6 +25,7 @@ APP_RD = os.environ.get('APP_RD') or 'app_rd'
 APP_CL = os.environ.get('APP_CL') or 'app_cl'
 APP_PLOT = os.environ.get('APP_PLOT') or 'app_plot'
 RESPONSE_TIMER_SEC = os.environ.get('RESPONSE_TIMER_SEC')
+RESPONSE_TIMER_SEC = int(RESPONSE_TIMER_SEC)
 
 app = Flask(__name__)
 
