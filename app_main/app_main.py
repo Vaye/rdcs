@@ -4,7 +4,7 @@
 Author: Jiawei Ye
 Date: 2023-06-19 21:18:55
 LastEditors: Jiawei Ye
-LastEditTime: 2023-06-20 21:49:29
+LastEditTime: 2023-11-06 16:14:18
 FilePath: /rdcs/app_main/app_main.py
 Description: 
 
@@ -24,6 +24,7 @@ import os
 APP_RD = os.environ.get('APP_RD') or 'app_rd'
 APP_CL = os.environ.get('APP_CL') or 'app_cl'
 APP_PLOT = os.environ.get('APP_PLOT') or 'app_plot'
+RESPONSE_TIMER_SEC = os.environ.get('RESPONSE_TIMER_SEC')
 
 app = Flask(__name__)
 
@@ -37,7 +38,7 @@ def retry_if_connection_error(exception):
 @retry(retry_on_exception=retry_if_connection_error, stop_max_attempt_number=3)
 def send_request(url, data):
     try:
-        response = requests.post(url, json=data, timeout=60)
+        response = requests.post(url, json=data, timeout=RESPONSE_TIMER_SEC)
         response.raise_for_status()  # 如果响应的状态码不是 200，引发异常
     except requests.exceptions.RequestException as e:
         logging.error("请求失败: %s", e)
@@ -87,6 +88,10 @@ def main_service():
         'cl_plots': cl_plots, 
         'kpi_plots': kpi_plots
         }
+    # result = {
+    #     'anomaly': anomaly
+    #     }
+    
     return jsonify(result)
 
 if __name__ == "__main__":

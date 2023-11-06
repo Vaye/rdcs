@@ -37,7 +37,7 @@ services:
     ports:
       - "5001:5001"
     volumes:
-      - /home/vaye/codes/projects/rdcs/models:/app/models
+      - ..models:/app/models
     # healthcheck:
     #   test: ["CMD", "curl", "-f", "http://localhost:5001/health"]
     #   interval: 30s
